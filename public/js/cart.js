@@ -64,7 +64,7 @@ function createProductCard(product) {
 
   const Delete = document.createElement("button");
   Delete.classList.add("delete-button");
-  Delete.textContent = "Delete";
+  Delete.textContent = "Delete ";
 
   quantityContainer.appendChild(quantityLabel);
   quantityContainer.appendChild(decreaseButton);

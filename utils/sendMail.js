@@ -2,15 +2,15 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: '***********',
-    pass: '***********',
+    user: 'shivamrelhan441@gmail.com',
+    pass: 'uiarhnvwwdsdmqzz',
   },
 });
 
 // Function to send an HTML email
 function sendHtmlEmail(userEmail, mailContent, emailSubject) {
   const mailOptions = {
-    from: '***********',
+    from: 'Ecommerce@gmail.com',
     to: userEmail,
     subject: emailSubject,
     html: mailContent,

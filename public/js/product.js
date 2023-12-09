@@ -21,7 +21,7 @@ function createProductCard(product) {
   name.textContent = product.productName;
   const price = document.createElement("h2");
   price.classList.add("product-price");
-  price.textContent = "Price : Rs."+product.productPrice;
+  price.textContent = "Price : Rs." + product.productPrice;
 
   const detailButton = document.createElement("button");
   detailButton.classList.add("detail-button");
@@ -71,11 +71,11 @@ loadMoreBtn.addEventListener("click", () => {
 let totalProductCount = 0;
 // to get the total product count
 fetch("/get-products")
-.then((response) => response.json())
-.then((data) => {
-  totalProductCount = data.products.length;
-})
-.catch((error) => console.error("Error fetching products:", error));
+  .then((response) => response.json())
+  .then((data) => {
+    totalProductCount = data.products.length;
+  })
+  .catch((error) => console.error("Error fetching products:", error));
 
 loadMoreBtn.click();
 
@@ -92,7 +92,7 @@ function addDetailButtonListeners(products) {
   });
 }
 
-let addToCartClickHandler; 
+let addToCartClickHandler;
 
 function addToCartButtonListeners(products) {
   if (addToCartClickHandler) {
@@ -103,7 +103,9 @@ function addToCartButtonListeners(products) {
     if (event.target.classList.contains("cart-button")) {
       const button = event.target;
       const productCard = button.closest(".product-card"); // Find the parent product card
-      const index = Array.from(productCard.parentElement.children).indexOf(productCard);
+      const index = Array.from(productCard.parentElement.children).indexOf(
+        productCard
+      );
       fetch("/cart", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -114,7 +116,6 @@ function addToCartButtonListeners(products) {
 
   container.addEventListener("click", addToCartClickHandler);
 }
-
 
 function showPopup(product) {
   document.getElementById("popupProductName").textContent = product.productName;

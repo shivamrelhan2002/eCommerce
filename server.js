@@ -256,12 +256,12 @@ app.post("/admin", upload.single("item"), async function (req, res, next) {
     await product.save();
     res.redirect("/");
   } catch (error) {
-    res.redirect("/");
+    console.error("An error occurred while adding the product:", error);
     res.status(500).send("An error occurred while adding the product");
   }
 });
 
-app.post('/adminUpdate', async function (req, res) {
+app.post("/adminUpdate", async function (req, res) {
   const curProduct = req.query.curProduct;
   const action = req.body.action;
   if (action === "update") {
@@ -279,17 +279,19 @@ app.post('/adminUpdate', async function (req, res) {
       updateData.quantity = req.body.quantity;
     }
     if (Object.keys(updateData).length > 0) {
-      await Products.updateOne({ productName: curProduct }, { $set: updateData });
+      await Products.updateOne(
+        { productName: curProduct },
+        { $set: updateData }
+      );
     }
-  }
-  else{
-    const image= await Products.findOne({ productName: curProduct});
-    fs.unlink(__dirname+'/uploads/'+image.productImage,(err => {
+  } else {
+    const image = await Products.findOne({ productName: curProduct });
+    fs.unlink(__dirname + "/uploads/" + image.productImage, (err) => {
       if (err) console.log(err);
-    }));
-    await Products.deleteOne({productName: curProduct});
+    });
+    await Products.deleteOne({ productName: curProduct });
   }
-  res.redirect('adminProducts');
+  res.redirect("adminProducts");
 });
 
 app.post("/changePass", async function (req, res) {
@@ -333,7 +335,7 @@ app.post("/cart", async function (req, res) {
   if (presentProduct) {
     await Cart.updateOne(
       { user: user, productName: product.productName },
-      { quantity: presentProduct.quantity + 1}
+      { quantity: presentProduct.quantity + 1 }
     );
     return;
   } else {
@@ -362,40 +364,42 @@ app.post("/deleteFromCart", async function (req, res) {
   }
 });
 
-app.post('/increaseQuantity',async function (req, res) {
-  try{
+app.post("/increaseQuantity", async function (req, res) {
+  try {
     const user = req.body.user;
     const product = req.body.product;
     const curQuantity = req.body.quantity;
-    const totalQuantity= await Products.findOne({productName:product});
-    if(curQuantity>=totalQuantity.quantity){
+    const totalQuantity = await Products.findOne({ productName: product });
+    if (curQuantity >= totalQuantity.quantity) {
       return;
+    } else {
+      await Cart.updateOne(
+        { user: user, productName: product },
+        { quantity: curQuantity + 1 }
+      );
+      res.json({ redirect: "/cart" });
     }
-    else{
-      await Cart.updateOne({user:user,productName:product},{quantity:curQuantity+1});
-      res.json({redirect:"/cart"});
-    }
-  }
-  catch(error) {
+  } catch (error) {
     console.error("Error in increasing quantity:", error);
     res.status(500).send("Error increasing quantity");
   }
 });
 
-app.post('/decreaseQuantity',async function (req, res) {
-  try{
+app.post("/decreaseQuantity", async function (req, res) {
+  try {
     const user = req.body.user;
     const product = req.body.product;
     const curQuantity = req.body.quantity;
-    if(curQuantity==1){
+    if (curQuantity == 1) {
       return;
+    } else {
+      await Cart.updateOne(
+        { user: user, productName: product },
+        { quantity: curQuantity - 1 }
+      );
+      res.json({ redirect: "/cart" });
     }
-    else{
-      await Cart.updateOne({user:user,productName:product},{quantity:curQuantity-1});
-      res.json({redirect:"/cart"});
-    }
-  }
-  catch(error) {
+  } catch (error) {
     console.error("Error in increasing quantity:", error);
     res.status(500).send("Error increasing quantity");
   }
