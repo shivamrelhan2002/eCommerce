@@ -15,22 +15,27 @@
         background-size: cover;
         background-position: center;
       }
+
       label {
-        color: #ccc;
+        color: #1a1616;
+        font-size: larger;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: 500;
       }
 
       form {
         border-radius: 10px;
         padding: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 px 6px rgba(0, 0, 0, 0.1);
+
         width: 100%;
         max-width: 400px;
-        background-image: url("./login_page.jpg");
+        background-size: cover;
       }
 
       h1 {
         text-align: center;
-        color: #ccc;
+        color: #1a1919;
       }
 
       label {
@@ -73,10 +78,12 @@
         text-align: center;
         margin-top: 15px;
       }
+
       .signup-link label,
       .reset-link label {
         display: inline-block;
       }
+
       .signup-link a,
       .reset-link a {
         text-decoration: none;
@@ -84,6 +91,7 @@
         padding: 5px 10px;
         transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
       }
+
       .signup-link a:hover,
       .reset-link a:hover {
         background-color: #524f4f;
@@ -115,7 +123,7 @@
       <p style="color: red"><%= error %></p>
       <% } %>
       <div class="signup-link">
-        <label>Didn't have account? </label><a href="/signup">Sign Up</a>
+        <label>Didn't have an account? </label><a href="/signup">Sign Up</a>
       </div>
       <div class="reset-link">
         <label>Forgot Password? </label><a href="/forgotPass">Reset Password</a>
