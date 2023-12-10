@@ -45,6 +45,7 @@
         border-radius: 5px;
         padding: 10px 20px;
         font-size: 18px;
+        margin-top: 30px;
         transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
       }
 
@@ -58,13 +59,34 @@
           rgba(172, 172, 180, 1) 100%
         );
       }
+      .home-content h2 {
+        font-size: 60px;
+        letter-spacing: 7px;
+        color: #f5f4f1;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 0 #000;
+        margin: 10px 0 24px;
+        text-align: center;
+        line-height: 50px; /* Add a subtle text shadow */
+      }
+      .home-content h3 {
+        color: #151414;
+        font-family: "Great Vibes", cursive;
+        font-size: 45px;
+        line-height: 10px;
+        font-weight: normal;
+        margin-bottom: 0px;
+        text-shadow: 0 1px 1px #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
+      }
     </style>
   </head>
 
   <body>
     <%- include('../partials/header.ejs',{username:username}) %>
     <div class="home-content">
-      <h2>Welcome to Your E-Commerce Store</h2>
+      <h2>WHAT'S NEW !</h2>
+      <h3>View The Latest Products</h3>
       <a class="cta-button" href="/products">Shop now</a>
     </div>
   </body>
